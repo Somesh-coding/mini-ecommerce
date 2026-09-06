@@ -14,6 +14,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./mini-ecommerce
+
     steps:
 
       - name: Checkout Repository
@@ -24,6 +28,9 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+
+      - name: Give permission to Maven Wrapper
+        run: chmod +x mvnw
 
       - name: Compile Application
         run: ./mvnw clean compile
