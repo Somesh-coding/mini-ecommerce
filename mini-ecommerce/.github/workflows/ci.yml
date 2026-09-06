@@ -1,0 +1,35 @@
+name: Mini E-Commerce CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Compile Application
+        run: ./mvnw clean compile
+
+      - name: Run Tests
+        run: ./mvnw test
+
+      - name: Build Application
+        run: ./mvnw package
